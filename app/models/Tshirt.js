@@ -2,12 +2,8 @@ const Sequelize = require('sequelize');
 
 const sequelize = require('../../util/database');
 
-const Tshirt = sequelize.define('T-shirt', {
-    T_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true
-    },
+const shirt = sequelize.define('shirt', {
+
     Name : {
         type: Sequelize.STRING,
         allowNull: false
@@ -30,4 +26,4 @@ const Tshirt = sequelize.define('T-shirt', {
     }
 });
 
-module.exports = Tshirt;
+module.exports = shirt;
