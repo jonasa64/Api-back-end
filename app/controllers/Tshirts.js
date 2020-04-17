@@ -56,9 +56,15 @@ exports.findById = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-    shirt.update(req.body, {
-        where: { id: id }
-    }).then(num => {
+    const updatedShirt = {
+        Name : req.body.name,
+      Color : req.body.color,
+     Price : req.body.price,
+     Description : req.body.description,
+      ImageUrl: req.body.ImageUrl
+    }
+
+    shirt.update(updatedShirt, {where: {id: id}}).then(num => {
         if (num == 1) {
             res.send({
                 message: "Shirt was updated successfully"
