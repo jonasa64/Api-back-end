@@ -26,21 +26,6 @@ sequelize.sync()
 shirt.hasMany(size);
 size.belongsTo(shirt);
 
-/*
-shirt.create({
-    Name: 'Polo shirt',
-    Color: 'Blue',
-    Price: 30.50,
-    Description: 'Blue polo shirt to the hot summer days',
-    ImageUrl: 'https://live.staticflickr.com/65535/49111529803_75f5ba54d3.jpg'
-}).then(shirt => console.log(shirt))
-    .catch(err => console.log(err));*/
-
-size.create({
-    size: 'small',
-    shirtId: 3
-}).then(size => console.log(size))
-    .catch(err => console.log(err))
 
 
 
