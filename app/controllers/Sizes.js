@@ -18,6 +18,7 @@ exports.create = (req, res) => {
 
 
 exports.update = (req, res) => {
+    console.log(req.body)
     const id = req.params.id;
 
     const updatedSize = {
