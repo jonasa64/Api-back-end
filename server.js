@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
 })
 
 require('./app/routes/Tshirts')(app);
+require('./app/routes/Sizes')(app);
 
 
 const port = 3000 || process.env.port;
