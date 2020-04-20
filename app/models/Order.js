@@ -9,16 +9,17 @@ const order = serialize.define('order', {
     },
     order_date: {
         type: Sequelize.DATE,
-        allowNull: false
+        defaultValue : Sequelize.NOW
     },
     order_status : {
         type: Sequelize.ENUM,
         values: ['pending', 'rejected', 'confirmed'],
-        allowNull: false
+        default: 'pending'
     },
-    shipping_date : {
-        type: Sequelize.DATE,
-        allowNull: false
+    shipping_status : {
+        type: Sequelize.ENUM,
+        values: ['not shipped', 'shipped'],
+        default: 'not shipped'
     },
     customerId : {
             type : Sequelize.INTEGER,
