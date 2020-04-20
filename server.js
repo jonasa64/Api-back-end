@@ -5,10 +5,17 @@ const sequelize = require('./util/database');
 const shirt = require('./app/models/Tshirt');
 const size = require('./app/models/Size');
 const shirts = require('./app/routes/Tshirts');
+const order = require('./app/models/Order');
+const orderDetails = require('./app/models/OrderDeatils');
+
 
 const app = express();
 app.use(cors());
 
+shirt.hasMany(orderDetails);
+orderDetails.belongsTo(shirt);
+order.hasMany(orderDetails);
+orderDetails.belongsTo(order);
 
 sequelize.sync();
 
