@@ -16,7 +16,7 @@ exports.create = (req, res) => {
 
     Customer.findAll({where: {Username: req.body.username}}).then(user => {
         if(user.length >= 1){
-         
+
              res.status(409).send({message: 'username is taken'});
         } else {
             return Customer.create(customer);
