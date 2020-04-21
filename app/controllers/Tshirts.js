@@ -17,7 +17,7 @@ exports.create = (req, res) => {
             res.send(data);
         }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occuredd while creating the shirt"
+            message: err.message || "Some error occurred while creating the shirt"
         });
     });
 

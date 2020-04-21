@@ -1,6 +1,5 @@
 module.exports = app => {
   var router = require("express").Router();
-  const customer = require("../controllers/Customer");
   var cors = require('cors');
 
   const customer = require("../controllers/Customer");
@@ -23,5 +22,5 @@ module.exports = app => {
   router.delete("/:id", customer.delete);
 
   app.use("/customer", router);
-
+  
 };
