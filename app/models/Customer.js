@@ -35,6 +35,5 @@ const serialize = require('../../util/database');
     }
   });
 
-
   module.exports = Customer;
 

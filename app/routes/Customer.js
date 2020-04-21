@@ -1,6 +1,13 @@
 module.exports = app => {
   var router = require("express").Router();
+  var cors = require('cors');
+
   const customer = require("../controllers/Customer");
+  app.all('/', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+  });
 
   // Create a new customer
   router.post("/", customer.create);
