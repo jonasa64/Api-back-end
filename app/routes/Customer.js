@@ -1,7 +1,6 @@
 module.exports = app => {
-  const customer = require("../controllers/Customer.js");
-
   var router = require("express").Router();
+  const customer = require("../controllers/Customer");
   var cors = require('cors');
 
   const customer = require("../controllers/Customer");
@@ -12,7 +11,7 @@ module.exports = app => {
   });
 
   // Create a new customer
-  router.post("/", customers.create);
+  router.post("/", customer.create);
 
   // Retrieve a single customer with id
   router.get("/:id", customer.findOne);

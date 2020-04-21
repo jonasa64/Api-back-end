@@ -1,21 +1,12 @@
-const db = require("../models/Customer");
-const Customer = db.Customer;
-const Op = db.Sequelize.Op;
+const Customer = require("../models/Customer");
 
 // Create and Save a new customer
 exports.create = (req, res) => {
-  // Validate request
-  if (!req.body.title) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
-  }
 
   // Create a customer
   const customer = {
     Name: req.body.name,
-    Phone: req.body.phone ? Phone: null,
+    Phone: req.body.phone,
     Email: req.body.email,
     Address: req.body.address,
     Username: req.body.username,
