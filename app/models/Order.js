@@ -14,14 +14,14 @@ const order = serialize.define('order', {
     order_status : {
         type: Sequelize.ENUM,
         values: ['pending', 'rejected', 'confirmed'],
-        default: 'pending'
+        defaultValue: 'pending'
     },
     shipping_status : {
         type: Sequelize.ENUM,
         values: ['not shipped', 'shipped'],
-        default: 'not shipped'
+        defaultValue: 'not shipped'
     },
-    customerId : {
+    customerCId : {
             type : Sequelize.INTEGER,
             allowNull : false,
 

@@ -7,6 +7,12 @@ module.exports = app => {
 
     router.delete('/delete/:id', orderController.delete);
 
+    router.get('/', orderController.findAll);
+
+    router.get('/:customerId', orderController.findByUserId);
+
+    router.get('/order/:id', orderController.findOne);
+
 
     app.use('/orders', router);
 }

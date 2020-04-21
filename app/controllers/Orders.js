@@ -1,11 +1,12 @@
 const order = require('../models/Order');
 const orderDetails = require('../models/OrderDeatils');
-
+const Customer = require('../models/Customer');
+const shirt = require('../models/Tshirt');
 exports.create = (req, res) => {
 
     order.create({
         total_price : req.body.totalPrice,
-        customerId : req.body.customerId
+        customerCId : req.body.customerId
     }).then(order => {
       return  orderDetails.create({
             quantity: req.body.quantity,
@@ -64,13 +65,35 @@ exports.update = (req, res) => {
 }
 
 exports.findAll = (req, res) => {
-
+    order.findAll({include: [orderDetails, Customer]}).then(orders => {
+        res.send(orders);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving shirts"
+        });
+    })
 }
 
 exports.findOne = (req, res) => {
 
+    const id = req.params.id;
+    order.findByPk(id,{ include: [orderDetails, Customer]}).then(order => {
+        res.send(order);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving shirts"
+        });
+    })
+
 }
 
 exports.findByUserId = (req, res) => {
-
+    const customerId = req.params.customerId;
+    order.findAll( {where : {customerCId: customerId}, include: [orderDetails, Customer]}).then(orders => {
+        res.send(orders);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving shirts"
+        });
+    })
 }
