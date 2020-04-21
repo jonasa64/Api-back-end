@@ -21,6 +21,7 @@ module.exports = app => {
   // Delete a customer with id
   router.delete("/:id", customer.delete);
 
-  app.use("/customer", router);
-  
+  router.post('/login', customer.login);
+
+  app.use('/customer', router);
 };

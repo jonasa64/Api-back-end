@@ -1,7 +1,9 @@
+
 const Sequelize = require('sequelize');
 const serialize = require('../../util/database');
 
   const Customer = serialize.define("customer", {
+
     C_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -33,4 +35,6 @@ const serialize = require('../../util/database');
     }
   });
 
+
   module.exports = Customer;
+
