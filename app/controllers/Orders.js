@@ -40,3 +40,25 @@ exports.delete = (req, res) => {
             })
         })
 }
+
+
+exports.update = (req, res) => {
+    const id = req.body.id;
+    order.update(req.body, {
+        where : {id: id}
+    }).then(num => {
+        if (num == 1) {
+            res.send({
+                message: "Order was updated successfully."
+            });
+        } else {
+            res.send({
+                message: `Cannot update order with id=${id}. Maybe customer was not found or req.body is empty!`
+            });
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: "Error updating order with id=" + id
+        });
+    })
+}
