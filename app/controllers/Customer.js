@@ -4,18 +4,6 @@ const jwt = require('jsonwebtoken');
 // Create and Save a new customer
 exports.create = (req, res) => {
 
-    Customer.findAll({where: {Username: req.body.username}}).then(user => {
-        if(user.length > 0){
-            return res.status(409).send({message: 'username is taken'});
-        }
-    }).catch(err => {
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while creating the customer."
-        });
-    })
-
-
     // Create a customer
     const customer = {
         Name: req.body.name,
@@ -26,17 +14,23 @@ exports.create = (req, res) => {
         Password: bcrypt.hashSync(req.body.password, 10)
     };
 
-    // Save customer in the database
-    Customer.create(customer)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the customer."
-            });
+    Customer.findAll({where: {Username: req.body.username}}).then(user => {
+        if(user.length >= 1){
+         
+             res.status(409).send({message: 'username is taken'});
+        } else {
+            return Customer.create(customer);
+        }
+
+
+    }).then(result => res.send(result)).catch(err => {
+
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while creating the customer."
         });
+    })
+
 };
 
 
