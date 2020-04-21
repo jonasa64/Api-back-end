@@ -7,15 +7,16 @@ const size = require('./app/models/Size');
 const shirts = require('./app/routes/Tshirts');
 const order = require('./app/models/Order');
 const orderDetails = require('./app/models/OrderDeatils');
-
+const Customer = require('./app/models/Customer');
 
 const app = express();
 app.use(cors());
-
+Customer.hasMany(order);
+order.belongsTo(Customer);
 shirt.hasMany(orderDetails);
 orderDetails.belongsTo(shirt);
 order.hasMany(orderDetails);
-orderDetails.belongsTo(order);
+orderDetails.belongsTo(order, {constraints: true, onDelete: 'CASCADE'});
 
 sequelize.sync();
 
