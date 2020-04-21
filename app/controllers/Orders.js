@@ -62,3 +62,15 @@ exports.update = (req, res) => {
         });
     })
 }
+
+exports.findAll = (req, res) => {
+
+}
+
+exports.findOne = (req, res) => {
+
+}
+
+exports.findByUserId = (req, res) => {
+
+}
