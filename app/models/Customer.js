@@ -1,4 +1,5 @@
-module.exports = (sequelize, Sequelize) => {
+ const sequelize = require('../../util/database')
+ const Sequelize  = require('sequelize');
   const Customer = sequelize.define("customer", {
     C_id: {
       type: Sequelize.INTEGER,
@@ -31,5 +32,4 @@ module.exports = (sequelize, Sequelize) => {
     }
   });
 
-  return Customer;
-};
+module.exports = Customer;
