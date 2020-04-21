@@ -1,7 +1,20 @@
 const Customer = require("../models/Customer");
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 // Create and Save a new customer
 exports.create = (req, res) => {
+
+    Customer.findAll({where: {Username: req.body.username}}).then(user => {
+        if(user.length > 0){
+            return res.status(409).send({message: 'username is taken'});
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while creating the customer."
+        });
+    })
+
 
     // Create a customer
     const customer = {
@@ -10,7 +23,7 @@ exports.create = (req, res) => {
         Email: req.body.email,
         Address: req.body.address,
         Username: req.body.username,
-        Password: req.body.password
+        Password: bcrypt.hashSync(req.body.password, 10)
     };
 
     // Save customer in the database
@@ -25,6 +38,37 @@ exports.create = (req, res) => {
             });
         });
 };
+
+
+exports.login = (req, res) => {
+    const username = req.body.username;
+    Customer.findAll({where : {Username: username}})
+        .then(user => {
+            if(user.length < 0){
+                return res.status(401).send({message: "Auth failed"})
+            }
+
+
+
+            if(bcrypt.compareSync(req.body.password, user[0].Password)){
+             const token =   jwt.sign({
+                    username: user[0].Username,
+                    id : user[0].C_id,
+                    name: user[0].Name,
+                    phone: user[0].Phone,
+                    mail : user[0].Email,
+                    address : user[0].Address
+                },
+                    "Henna and Jonas are a greet team",
+                    {
+                        expiresIn: '1h'
+                    });
+                return res.status(200).send({message : "Auth successful", token : token});
+            } else {
+                return res.status(401).send({message: "Auth failed"})
+            }
+        })
+}
 
 // Find a single customer with an id
 exports.findOne = (req, res) => {
