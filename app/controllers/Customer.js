@@ -1,4 +1,5 @@
 const Customer = require("../models/Customer");
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 // Create and Save a new customer
@@ -29,7 +30,8 @@ exports.create = (req, res) => {
             message:
                 err.message || "Some error occurred while creating the customer."
         });
-    })
+
+
 
 };
 
