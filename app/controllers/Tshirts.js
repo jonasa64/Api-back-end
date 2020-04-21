@@ -8,8 +8,6 @@ exports.create = (req, res) => {
         Price: req.body.price,
         Description: req.body.description,
         ImageUrl: req.body.imageUrl
-
-
     };
 
     shirt.create(newShirt)
