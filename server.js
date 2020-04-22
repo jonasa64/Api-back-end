@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
-    res.send('i am working');
+    res.send('I am working');
 })
 
 require('./app/routes/Tshirts')(app);

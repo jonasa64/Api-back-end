@@ -14,17 +14,17 @@ exports.create = (req, res) => {
         .then(data => {
             res.send(data);
         }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the shirt"
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the shirt"
+            });
         });
-    });
 
 }
 
 
 exports.findAll = (req, res) => {
 
- shirt.findAll()
+    shirt.findAll()
         .then(data => {
             res.send(data);
         })
@@ -55,14 +55,14 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     const updatedShirt = {
-        Name : req.body.name,
-      Color : req.body.color,
-     Price : req.body.price,
-     Description : req.body.description,
-      ImageUrl: req.body.ImageUrl
+        Name: req.body.name,
+        Color: req.body.color,
+        Price: req.body.price,
+        Description: req.body.description,
+        ImageUrl: req.body.ImageUrl
     }
 
-    shirt.update(updatedShirt, {where: {id: id}}).then(num => {
+    shirt.update(updatedShirt, { where: { id: id } }).then(num => {
         if (num == 1) {
             res.send({
                 message: "Shirt was updated successfully"
