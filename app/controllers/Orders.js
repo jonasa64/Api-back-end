@@ -44,8 +44,11 @@ exports.delete = (req, res) => {
 
 
 exports.update = (req, res) => {
-    const id = req.body.id;
-    order.update(req.body, {
+    const id = req.params.id;
+    order.update({
+        order_status: req.body.orderStatus,
+        shipping_status: req.body.shippingStatus
+    }, {
         where : {id: id}
     }).then(num => {
         if (num == 1) {
@@ -54,7 +57,7 @@ exports.update = (req, res) => {
             });
         } else {
             res.send({
-                message: `Cannot update order with id=${id}. Maybe customer was not found or req.body is empty!`
+                message: `Cannot update order with id=${id}. Maybe order was not found or req.body is empty!`
             });
         }
     }).catch(err => {
