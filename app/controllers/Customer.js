@@ -37,7 +37,7 @@ exports.login = (req, res) => {
   const username = req.body.username;
   Customer.findAll({ where: { Username: username } })
     .then(user => {
-      if (user.length < 0) {
+      if (!user.length) {
         return res.status(401).send({ message: "Auth failed" })
       }
 
@@ -54,7 +54,16 @@ exports.login = (req, res) => {
           {
             expiresIn: '1h'
           });
-        return res.status(200).send({ message: "Auth successful", token: token });
+
+        const customer = {
+          username: user[0].Username,
+          id: user[0].C_id,
+          name: user[0].Name,
+          phone: user[0].Phone,
+          mail: user[0].Email,
+          address: user[0].Address
+        }
+        return res.status(200).send({ message: "Auth successful", token: token, user: customer });
       } else {
         return res.status(401).send({ message: "Auth failed" })
       }
